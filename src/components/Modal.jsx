@@ -4,7 +4,7 @@ import EmployeeForm from './employeeForm';
 const AddModal = () => {
     const [open, setOpen] = useState(false);
   return (
-    <>
+    <div className='flex justify-end'>
       <Button type="primary" onClick={() => setOpen(true)}>
         Add Employee
       </Button>
@@ -18,7 +18,7 @@ const AddModal = () => {
       </Modal>
       <br />
       <br />
-    </>
+    </div>
   );
 };
 export default AddModal;
