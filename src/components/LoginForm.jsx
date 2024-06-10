@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import loginIllustration from '../assets/login2.svg'
 
 const LoginForm = () => {
-  return <div className='bg-gray-100 h-screen flex items-center '>
+  return (
+  <div className='bg-gray-100 h-screen flex items-center '>
     <div style={{margin:"0 auto"}} className="bg-white w-[80%] h-[90%] rounded-lg flex">
         <div className='max-w-96  h-full flex flex-col justify-center items-center '>
             <div className="pr-8">
@@ -50,6 +51,7 @@ const LoginForm = () => {
         <img className=' w-[80%]' src={loginIllustration} alt="Login Illustration" />
         </div>
     </div>
-  </div>;
+  </div>
+  )
 };
 export default LoginForm;
