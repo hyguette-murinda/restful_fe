@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import EmployeeForm from './employeeForm';
-const App = () => {
+const AddModal = () => {
     const [open, setOpen] = useState(false);
   return (
     <>
@@ -21,4 +21,4 @@ const App = () => {
     </>
   );
 };
-export default App;
+export default AddModal;
