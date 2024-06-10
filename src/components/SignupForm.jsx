@@ -13,7 +13,7 @@ const SignUpForm = () =>{
                 <form action="" className=' p-8'>
                     <div className="flex flex-col text-sm p-4">
                         <label htmlFor="fullNames"> full names*</label>
-                        <input type="text" name="fullNames" placeholder="names" 
+                        <input type="text" name="fullNames" placeholder="Enter names" 
                         className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100" />
                     </div>
                     <div className="flex flex-col text-sm p-4">
@@ -44,9 +44,9 @@ const SignUpForm = () =>{
                    <label className='text-[14px] pr-12' >I agree to all terms and conditions</label> 
                    </div>
     
-                <button className='w-80 ml-2  bg-[#0B1355] font-medium rounded-lg text-sm   py-2.5 text-center text-white'>Login</button>
+                <button className='w-80 ml-2  bg-[#0B1355] font-medium rounded-lg text-sm   py-2.5 text-center text-white'>Register</button>
                 <p className='text-sm p-2 pt-4'>Don't have an account? 
-                <Link to="/" className="font-medium text-primary-600 hover:underline">Login in</Link></p>
+                <Link to="/" className="font-medium text-primary-600 hover:underline">login</Link></p>
                 </form>
             </div>
             <div className=" w-full  flex items-center justify-center ">
