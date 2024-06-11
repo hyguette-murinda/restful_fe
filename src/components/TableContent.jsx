@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import {
   closestCenter,
   DndContext,
@@ -15,22 +15,22 @@ import {
   useSortable,
 } from '@dnd-kit/sortable';
 import { Table } from 'antd';
+import { api } from '../api/api';
+
 const DragIndexContext = createContext({
-  active: -1,
-  over: -1,
+  active: 3,
+  over: 3,
 });
+
 const dragActiveStyle = (dragState, id) => {
   const { active, over, direction } = dragState;
-  // drag active style
   let style = {};
   if (active && active === id) {
     style = {
-      backgroundColor: 'gray',
+      backgroundColor: 'red',
       opacity: 0.5,
     };
-  }
-  // dragover dashed style
-  else if (over && id === over && active !== over) {
+  } else if (over && id === over && active !== over) {
     style =
       direction === 'right'
         ? {
@@ -42,6 +42,7 @@ const dragActiveStyle = (dragState, id) => {
   }
   return style;
 };
+
 const TableBodyCell = (props) => {
   const dragState = useContext(DragIndexContext);
   return (
@@ -54,6 +55,7 @@ const TableBodyCell = (props) => {
     />
   );
 };
+
 const TableHeaderCell = (props) => {
   const dragState = useContext(DragIndexContext);
   const { attributes, listeners, setNodeRef, isDragging } = useSortable({
@@ -73,134 +75,50 @@ const TableHeaderCell = (props) => {
   };
   return <th {...props} ref={setNodeRef} style={style} {...attributes} {...listeners} />;
 };
-const dataSource = [
-  {
-    key: '1',
-    name: 'John Brown',
-    gender: 'male',
-    age: 32,
-    email: 'John Brown@example.com',
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    gender: 'female',
-    age: 42,
-    email: 'jimGreen@example.com',
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    gender: 'female',
-    age: 32,
-    email: 'JoeBlack@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '4',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '5',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '6',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '7',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '8',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '9',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '10',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '11',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '12',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '13',
-    name: 'George Hcc',
-    gender: 'male',
-    age: 20,
-    email: 'george@example.com',
-    address: 'Sidney No. 1 Lake Park',
-  },
-];
+
 const baseColumns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
+    title: 'FirstName',
+    dataIndex: 'firstname',
   },
   {
-    title: 'Gender',
-    dataIndex: 'gender',
+    title: 'LastName',
+    dataIndex: 'lastname',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
+    title: 'NationalID',
+    dataIndex: 'nationalid',
   },
   {
     title: 'Email',
     dataIndex: 'email',
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
+    title: 'Telephone',
+    dataIndex: 'mobile',
+  },
+  {
+    title: 'Department',
+    dataIndex: 'department',
+  },
+  {
+    title: 'Position',
+    dataIndex: 'position',
+  },
+  {
+    title: 'Manufacturer',
+    dataIndex: 'laptopmanu',
+  },
+  {
+    title: 'Model',
+    dataIndex: 'model',
+  },
+  {
+    title: 'SN',
+    dataIndex: 'serialnumber',
   },
 ];
+
 const TableContent = () => {
   const [dragIndex, setDragIndex] = useState({
     active: -1,
@@ -216,16 +134,17 @@ const TableContent = () => {
       onCell: () => ({
         id: `${i}`,
       }),
-    })),
+    }))
   );
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        // https://docs.dndkit.com/api-documentation/sensors/pointer#activation-constraints
         distance: 1,
       },
-    }),
+    })
   );
+
   const onDragEnd = ({ active, over }) => {
     if (active.id !== over?.id) {
       setColumns((prevState) => {
@@ -239,6 +158,7 @@ const TableContent = () => {
       over: -1,
     });
   };
+
   const onDragOver = ({ active, over }) => {
     const activeIndex = columns.findIndex((i) => i.key === active.id);
     const overIndex = columns.findIndex((i) => i.key === over?.id);
@@ -248,6 +168,29 @@ const TableContent = () => {
       direction: overIndex > activeIndex ? 'right' : 'left',
     });
   };
+
+  const [data, setData] = useState([]);
+
+  const getAllEmployees = async () => {
+    try {
+      const response = await api.get('http://localhost:5000/api/v1/laptop/all');
+      console.log("API response:", response.data);
+
+      const employees = response.data.data; // Adjust this if necessary
+      if (Array.isArray(employees)) {
+        setData(employees);
+      } else {
+        console.error("Expected an array but got:", employees);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getAllEmployees();
+  }, []);
+
   return (
     <DndContext
       sensors={sensors}
@@ -261,7 +204,7 @@ const TableContent = () => {
           <Table
             rowKey="key"
             columns={columns}
-            dataSource={dataSource}
+            dataSource={data}
             components={{
               header: {
                 cell: TableHeaderCell,
@@ -286,4 +229,5 @@ const TableContent = () => {
     </DndContext>
   );
 };
+
 export default TableContent;
