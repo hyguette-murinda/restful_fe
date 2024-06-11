@@ -1,15 +1,5 @@
-import React from 'react';
-import {
-  Button,
-  Cascader,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Mentions,
-  Select,
-  TreeSelect,
-} from 'antd';
+import React, { useState } from 'react';
+import {Button, Cascader, DatePicker, Form, Input,InputNumber,Mentions,Select,TreeSelect,} from 'antd';
 const { RangePicker } = DatePicker;
 const formItemLayout = {
   labelCol: {
@@ -29,7 +19,26 @@ const formItemLayout = {
     },
   },
 };
-const EmployeeForm = () => (
+const EmployeeForm = () => {
+  const [laptopId, setLaptopId] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [nationalId, setNationalId] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("")
+  const [department, setDepartment] = useState("");
+  const [position, setPosition] = useState("");
+  const [laptopmanu, setLaptopmanu] = useState("");
+  const [model, setModel] = useState("");
+  const [serialNumber, setSerialNumber] = useState("")
+
+
+
+
+
+
+
+  return(
   <Form
     {...formItemLayout}
     variant="filled"
@@ -38,14 +47,16 @@ const EmployeeForm = () => (
     }}
   >
     <Form.Item
-      label="laptop Id"
-      name="laptop Id"
+      label="laptopId"
+      name="laptopId"
       rules={[
         {
           required: true,
           message: 'Please laptopid!',
         },
       ]}
+      value={laptopId}
+      onChange={(e) =>setLaptopId(e.target.value) }
     >
       <Input />
     </Form.Item>
@@ -59,6 +70,8 @@ const EmployeeForm = () => (
           message: 'Please firstname!',
         },
       ]}
+      value={firstname}
+      onChange={(e) =>setFirstname(e.target.value) }
     >
       <InputNumber
         style={{
@@ -76,6 +89,8 @@ const EmployeeForm = () => (
           message: 'Please lastname!',
         },
       ]}
+      value={lastname}
+      onChange={(e) =>setLastname(e.target.value) }
     >
       <Mentions />
       {/* <Input.TextArea /> */}
@@ -90,6 +105,8 @@ const EmployeeForm = () => (
           message: 'Please national id!',
         },
       ]}
+      value={nationalId}
+      onChange={(e) =>setNationalId(e.target.value) }
     >
       <Mentions />
     </Form.Item>
@@ -103,6 +120,8 @@ const EmployeeForm = () => (
           message: 'Please email!',
         },
       ]}
+      value={mobile}
+      onChange={(e) =>setMobile(e.target.value) }
     >
       {/* <Select /> */}
       <Mentions />
@@ -117,6 +136,8 @@ const EmployeeForm = () => (
           message: 'Please enter email!',
         },
       ]}
+      value={email}
+      onChange={(e) =>setEmail(e.target.value) }
     >
       {/* <Cascader /> */}
       <Mentions />
@@ -131,6 +152,8 @@ const EmployeeForm = () => (
           message: 'Please enter department!',
         },
       ]}
+      value={department}
+      onChange={(e) =>setDepartment(e.target.value) }
     >
       {/* <TreeSelect /> */}
       <Mentions />
@@ -145,6 +168,8 @@ const EmployeeForm = () => (
           message: 'Please enter position!',
         },
       ]}
+      value={position}
+      onChange={(e) =>setPosition(e.target.value) }
     >
       <Mentions />
       {/* <DatePicker /> */}
@@ -158,6 +183,8 @@ const EmployeeForm = () => (
           message: 'Please enter pc manufacturer!',
         },
       ]}
+      value={laptopmanu}
+      onChange={(e) =>setLaptopmanu(e.target.value) }
     >
       <Mentions />
       </Form.Item>
@@ -170,6 +197,8 @@ const EmployeeForm = () => (
           message: 'Please enter model!',
         },
       ]}
+      value={model}
+      onChange={(e) =>setModel(e.target.value) }
     >
       <Mentions />
       </Form.Item>
@@ -181,7 +210,10 @@ const EmployeeForm = () => (
           required: true,
           message: 'Please enter serial number!',
         },
+        
       ]}
+      value={serialNumber}
+      onChange={(e) =>setSerialNumber(e.target.value) }
     >
       <Mentions />
     </Form.Item>
@@ -197,5 +229,6 @@ const EmployeeForm = () => (
       </Button>
     </Form.Item>
   </Form>
-);
+)
+};
 export default EmployeeForm;
