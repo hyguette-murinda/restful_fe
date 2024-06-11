@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import loginIllustration from '../assets/signup2.svg'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as Yup from 'yup'
+import axios from "axios";
+
 const SignUpForm = () =>{
+    const [fullname, setFullname] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent default form submission
+        const validationSchema = Yup.object().shape({
+            email: Yup.string().email().required("Email is required"),
+            password: Yup.string().required("Password is required")
+          });
+       
+        try {
+        await validationSchema.validate({ email, password, fullname });
+          const user = {
+            fullname: fullname,
+            email:email,
+            password:password,
+            
+          };
+    
+          const response = await axios.post("http://localhost:5000/api/v1/user/register", user);
+          console.log(response.data);
+             navigate("/");
+    
+        } catch (err) {
+          console.error("Error creating user", err);
+        }
+      };
     return(
         <div className='bg-gray-100 h-screen flex items-center '>
         <div style={{margin:"0 auto"}} className="bg-white w-[80%] h-[90%] rounded-lg flex">
@@ -10,29 +43,33 @@ const SignUpForm = () =>{
                 <h1 className='bold pb-4  text-[#101540] font-bold text-2xl'>Sign up</h1>
                 <p className='text-sm'>Welcome back please enter your details</p>
                 </div>
-                <form action="" className=' p-8'>
+                <form action="" className=' p-8' onSubmit={handleSubmit}>
                     <div className="flex flex-col text-sm p-4">
                         <label htmlFor="fullNames"> full names*</label>
-                        <input type="text" name="fullNames" placeholder="Enter names" 
-                        className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100" />
+                        <input type="text" name="fullNames" placeholder="Enter names" value={fullname}
+                        className="p-2.5 w-full border border-gray-300 rounded-md bg-gray-100" onChange={(e) => setFullname(e.target.value)} />
                     </div>
                     <div className="flex flex-col text-sm p-4">
                         <label htmlFor="email">Email*</label>
                     <input 
+                    value={email}
                     type="text"
                     name='email' 
                     placeholder='Enter your email'
                     className='p-2.5 w-full border border-gray-300 rounded-md bg-gray-100'
+                    onChange={(e) => setEmail(e.target.value)}
                     /> 
                     </div>
                   
                    <div className="flex flex-col text-sm p-4">
                         <label htmlFor="password">Password*</label>
                     <input 
+                    value={password}
                     type="password"
                     name='password' 
                     placeholder='Minimum 8 characters'
                     className='p-2.5 border w-full border-gray-300 rounded-md bg-gray-100'
+                    onChange={(e) => setPassword(e.target.value)}
                     /> 
                    </div>
                    <div className="pt-2.5 flex p-4  justify-between ">
