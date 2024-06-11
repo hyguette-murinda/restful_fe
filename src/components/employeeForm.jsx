@@ -38,12 +38,12 @@ const EmployeeForm = () => (
     }}
   >
     <Form.Item
-      label="Input"
-      name="Input"
+      label="laptop Id"
+      name="laptop Id"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please laptopid!',
         },
       ]}
     >
@@ -51,12 +51,12 @@ const EmployeeForm = () => (
     </Form.Item>
 
     <Form.Item
-      label="InputNumber"
-      name="InputNumber"
+      label="firstname"
+      name="firstname"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please firstname!',
         },
       ]}
     >
@@ -68,25 +68,26 @@ const EmployeeForm = () => (
     </Form.Item>
 
     <Form.Item
-      label="TextArea"
-      name="TextArea"
+      label="lastname"
+      name="lastname"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please lastname!',
         },
       ]}
     >
-      <Input.TextArea />
+      <Mentions />
+      {/* <Input.TextArea /> */}
     </Form.Item>
 
     <Form.Item
-      label="Mentions"
-      name="Mentions"
+      label="nationalId"
+      name="nationalId"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please national id!',
         },
       ]}
     >
@@ -94,68 +95,95 @@ const EmployeeForm = () => (
     </Form.Item>
 
     <Form.Item
-      label="Select"
-      name="Select"
+      label="mobile"
+      name="mobile"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please email!',
         },
       ]}
     >
-      <Select />
+      {/* <Select /> */}
+      <Mentions />
     </Form.Item>
 
     <Form.Item
-      label="Cascader"
-      name="Cascader"
+      label="email"
+      name="email"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please enter email!',
         },
       ]}
     >
-      <Cascader />
+      {/* <Cascader /> */}
+      <Mentions />
     </Form.Item>
 
     <Form.Item
-      label="TreeSelect"
-      name="TreeSelect"
+      label="department"
+      name="department"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please enter department!',
         },
       ]}
     >
-      <TreeSelect />
+      {/* <TreeSelect /> */}
+      <Mentions />
     </Form.Item>
 
     <Form.Item
-      label="DatePicker"
-      name="DatePicker"
+      label="Position"
+      name="Position"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please enter position!',
         },
       ]}
     >
-      <DatePicker />
+      <Mentions />
+      {/* <DatePicker /> */}
     </Form.Item>
-
     <Form.Item
-      label="RangePicker"
-      name="RangePicker"
+      label="laptopmanu"
+      name="laptopmanu"
       rules={[
         {
           required: true,
-          message: 'Please input!',
+          message: 'Please enter pc manufacturer!',
         },
       ]}
     >
-      <RangePicker />
+      <Mentions />
+      </Form.Item>
+      <Form.Item
+      label="model"
+      name="model"
+      rules={[
+        {
+          required: true,
+          message: 'Please enter model!',
+        },
+      ]}
+    >
+      <Mentions />
+      </Form.Item>
+      <Form.Item
+      label="serialnumber"
+      name="serialnumber"
+      rules={[
+        {
+          required: true,
+          message: 'Please enter serial number!',
+        },
+      ]}
+    >
+      <Mentions />
     </Form.Item>
 
     <Form.Item
@@ -164,7 +192,7 @@ const EmployeeForm = () => (
         span: 16,
       }}
     >
-      <Button type="primary" htmlType="submit">
+      <Button type="primary" htmlType="submit" className='bg-[#0B1355]'>
         Submit
       </Button>
     </Form.Item>
