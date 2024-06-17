@@ -119,7 +119,7 @@ const baseColumns = [
   },
 ];
 
-const TableContent = () => {
+const TableContent = ({data}) => {
   const [dragIndex, setDragIndex] = useState({
     active: -1,
     over: -1,
@@ -169,27 +169,7 @@ const TableContent = () => {
     });
   };
 
-  const [data, setData] = useState([]);
 
-  const getAllEmployees = async () => {
-    try {
-      const response = await api.get('http://localhost:5000/api/v1/laptop/all');
-      console.log("API response:", response.data);
-
-      const employees = response.data.data; // Adjust this if necessary
-      if (Array.isArray(employees)) {
-        setData(employees);
-      } else {
-        console.error("Expected an array but got:", employees);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    getAllEmployees();
-  }, []);
 
   return (
     <DndContext

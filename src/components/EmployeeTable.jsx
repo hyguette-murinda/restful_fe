@@ -1,7 +1,7 @@
 import React from "react";
 import TableContent from "./TableContent";
 import AddModal from "./Modal";
-const EmployeeTable =() =>{
+const EmployeeTable =({data}) =>{
     return(
         <div>
             <div className="flex justify-between m-4">
@@ -9,7 +9,7 @@ const EmployeeTable =() =>{
                 <AddModal />
             </div>
             <div>
-                <TableContent />
+                <TableContent data={data} />
             </div>
         </div>
     )

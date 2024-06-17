@@ -19,7 +19,7 @@ const navigation = [
   ];
 
 const SideBar = () => {
-  return <div style={{gridColumn:"1/2",gridRow:"1/3"}} className='flex items-center pt-[3rem]  flex-col  p-5'>
+  return <div className='flex sticky top-0 items-center pt-[3rem] w-[300px] flex-col  p-5'>
      <h1>EmpLap</h1> 
     <div className="h-full  w-full flex items-center justify-center pt-8">
     <ul className="space-y-2 font-medium  flex flex-col h-full w-full  justify-start ">

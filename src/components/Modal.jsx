@@ -5,7 +5,7 @@ const AddModal = () => {
     const [open, setOpen] = useState(false);
   return (
     <div className='flex justify-end'>
-      <Button type="primary" onClick={() => setOpen(true)} className='bg-[#0B1355] p-5'>
+      <Button type="primary" onClick={() => setOpen(true)} className='bg-[#65469b] p-5'>
         Add Employee
       </Button>
       <Modal
